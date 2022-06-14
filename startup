@@ -1,0 +1,22 @@
+#!/bin/bash
+
+gnome-terminal -- ./coordinator -p 9090
+
+gnome-terminal -- ./fsynch -c 9090 -h 0.0.0.0 -i 1 -p 9790
+
+gnome-terminal -- ./fsynch -c 9090 -h 0.0.0.0 -i 2 -p 9890
+
+gnome-terminal -- ./fsynch -c 9090 -h 0.0.0.0 -i 3 -p 9990
+
+gnome-terminal -- ./tsd -c 0.0.0.0 -o 9090 -p 9490 -i 1 -t slave
+
+gnome-terminal -- ./tsd -c 0.0.0.0 -o 9090 -p 9590 -i 2 -t slave
+
+gnome-terminal -- ./tsd -c 0.0.0.0 -o 9090 -p 9690 -i 3 -t slave
+
+gnome-terminal -- ./tsd -c 0.0.0.0 -o 9090 -p 9190 -i 1 -t master
+
+gnome-terminal -- ./tsd -c 0.0.0.0 -o 9090 -p 9290 -i 2 -t master
+
+gnome-terminal -- ./tsd -c 0.0.0.0 -o 9090 -p 9390 -i 3 -t master
+

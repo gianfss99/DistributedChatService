@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package synch;
+
+import "google/protobuf/timestamp.proto";
+
+// The messenger service definition.
+service SynchService{
+  rpc User (Target) returns (Confirmation) {}
+  rpc Follower (Target) returns (Confirmation) {}
+  rpc Update (Target) returns (Confirmation) {}
+
+}
+
+enum TargetType{
+  NEW_USER = 0;
+  NEW_FOLLOWER = 1;
+  NEW_POST = 2;
+}
+
+message Target {
+  string id = 1;
+  string tgt = 2;
+  string msg = 3;
+}
+
+message Confirmation {
+  string msg = 1;
+}

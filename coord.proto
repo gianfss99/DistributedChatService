@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package coord;
+
+import "google/protobuf/timestamp.proto";
+
+service CoordService{
+    rpc Contact(Attempt) returns (Response){}
+    rpc ServerAlive(stream Heartbeat) returns (stream Heartbeat){}
+    rpc Subscribe(Credentials) returns (Response){}
+}
+
+enum ProcessType{
+    MASTER = 0;
+    SLAVE = 1;
+    FSYNCH = 2;
+    CLIENT = 3;
+}
+
+message Credentials{
+    int32 id = 1;
+    string port = 2;
+    ProcessType service = 3;
+}
+
+message Attempt{
+    int32 id = 1;
+    ProcessType service = 2;
+}
+
+message Response{
+    string ip = 1;
+    string port = 2;
+    ProcessType service = 3;
+}
+
+message Heartbeat{
+    int32 id = 1;
+    ProcessType server_type = 2;
+    google.protobuf.Timestamp timestamp = 3;
+}
